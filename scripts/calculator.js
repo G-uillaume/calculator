@@ -1,19 +1,30 @@
 function safeEval(str) {
-    return Function('return ' + str)()
+    return Math.round(Function('return ' + str)()*1000000000) / 1000000000
 }
 
-let a;
+const btn = document.querySelectorAll('.btn');
 
-const button = document.querySelectorAll('button')
-
-for (let i of button) {
+for (let i of btn) {
     i.addEventListener('click', () => {
+        if (p.textContent == 0 && p2.textContent == 0) {
+            p.textContent = '';
+            p2.textContent = '';
+        }
         if (i.textContent != 'AC' && i.textContent != '=') {
-            input.value += String(i.textContent);
-        } else if (i.textContent == 'AC') {
-            input.value = '';
+            if (i.textContent == '%') {
+                p.textContent = String(Number(p.textContent) / 100);
+                p2.textContent = String(Number(p2.textContent) / 100);
+            } else {
+                p.textContent += String(i.textContent);
+                p2.textContent += ' ' + String(i.textContent);
+            }
+        }
+        else if (i.textContent == 'AC') {
+            p.textContent = '0';
+            p2.textContent = '0';
         } else {
-            input.value = safeEval(String(input.value))
+            p.textContent = safeEval(String(p.textContent))
+            p2.textContent += ' = ' + safeEval(String(p.textContent))
         }
     })
 }

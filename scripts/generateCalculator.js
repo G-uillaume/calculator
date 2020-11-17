@@ -1,54 +1,27 @@
-const signs = [
-    ['(', ')', '%', 'AC'], 
-    [7, 8, 9, '/'],
-    [4, 5, 6, '*'],
-    [1, 2, 3, '-'],
-    [0, '.', '=', '+']
-]
+const signs = ['(', ')', '%', 'AC', 7, 8, 9, '/', 4, 5, 6, '*', 1, 2, 3, '-', 0, '.', '=', '+']
 
-// const body = document.querySelector('body');
+const grid = document.createElement('section');
+grid.className = 'grid';
 
-const container = document.createElement('main');
-container.className = 'container';
+const para = document.createElement('div');
+para.className = 'para';
 
-const section = document.createElement('div');
-section.className = 'section';
+const p = document.createElement('p');
+p.className = 'p';
+p.textContent = '0';
 
-const columns = document.createElement('div');
-columns.className = 'columns is-centered';
+const p2 = document.createElement('p');
+p2.className = 'p2';
+p2.textContent = '0'
 
-const card = document.createElement('div');
-card.className = 'card column is-one-fifth is-mobile';
-
-const control = document.createElement('div');
-control.className = 'control';
-
-const input = document.createElement('input');
-input.className = 'input has-text-right'
-input.type = 'text';
-input.readOnly = true;
-// input.placeholder = '0';
-
-control.appendChild(input);
-card.appendChild(control);
-
-const isCentered = document.createElement('div');
-isCentered.className = 'is-centered';
+para.appendChild(p2);
+para.appendChild(p);
+grid.appendChild(para);
 
 for (let i = 0; i < signs.length; i++) {
-    const div = document.createElement('div')
-    div.className = 'p-1';
-    for (let j = 0; j < signs[i].length; j++) {
-        const button = document.createElement('button');
-        button.className = 'button';
-        button.textContent = signs[i][j];
-        div.appendChild(button);
-    }
-    isCentered.appendChild(div);
+    const btn = document.createElement('div');
+    btn.className = 'btn';
+    btn.textContent = signs[i];
+    grid.appendChild(btn);
 }
-
-card.appendChild(isCentered)
-columns.appendChild(card);
-section.appendChild(columns);
-container.appendChild(section);
-document.body.appendChild(container);
+document.body.appendChild(grid)
