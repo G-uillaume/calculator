@@ -72,6 +72,20 @@ body {
 .btn:nth-child(25):hover,
 .btn:nth-child(31):hover {
     background-color: #222;
+}
+
+.btn:nth-child(10):hover,
+.btn:nth-child(11):hover,
+.btn:nth-child(12):hover,
+.btn:nth-child(16):hover,
+.btn:nth-child(17):hover,
+.btn:nth-child(18):hover,
+.btn:nth-child(22):hover,
+.btn:nth-child(23):hover,
+.btn:nth-child(24):hover,
+.btn:nth-child(28):hover,
+.btn:nth-child(29):hover {
+    background-color: #C51414;
     color: #fff;
 }
 
@@ -89,7 +103,25 @@ body {
     color: #fff;
 }
 
+.btn:nth-child(2):hover,
+.btn:nth-child(3):hover,
+.btn:nth-child(8):hover,
+.btn:nth-child(9):hover,
+.btn:nth-child(14):hover,
+.btn:nth-child(15):hover,
+.btn:nth-child(20):hover,
+.btn:nth-child(21):hover,
+.btn:nth-child(26):hover,
+.btn:nth-child(27):hover {
+    background-color: rgb(23, 35, 141);
+}
+
 .btn:nth-child(30) {
     background-color: #c51414;
     color: #fff;
+}
+
+.btn:nth-child(30):hover {
+    background-color: #eee;
+    color: #000;
 }
