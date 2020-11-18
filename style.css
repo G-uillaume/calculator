@@ -3,16 +3,16 @@ body {
 }
 
 .grid {
-    width: 250px;
-    margin: auto;
+    width: 380px;
+    margin: 70px auto 0 auto;
     display: grid;
-    grid-template-columns: repeat(4, 50px);
-    grid-template-rows: minmax(100px, auto) repeat(5, 30px);
+    grid-template-columns: repeat(6, 50px);
+    grid-template-rows: 100px repeat(5, 30px);
     grid-column-gap: 10px;
     grid-row-gap: 20px;
     justify-content: center;
     align-content: center;
-    padding: 10px 0;
+    padding: 20px 0;
     border: 1px solid #333;
     border-radius: 10px;
     box-shadow: 0 0 60px #333;
@@ -20,17 +20,21 @@ body {
 }
 
 .para {
-    grid-column: 1 /  span 4;
+    grid-column: 1 /  span 6;
     text-align: right;
     padding-right: 20px;
     font-size: 30px;
     border: 1px solid black;
     border-radius: 20px;
     background-color: #eee;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    margin-right: 5px;
 }
 
 .p {
     font-size: 24px;
+    /* direction: rtl; */
 }
 
 .p2 {
@@ -45,21 +49,47 @@ body {
     text-align: center;
     cursor: pointer;
     background-color: #eee;
+    outline: none;
+}
+
+.btn:nth-child(4),
+.btn:nth-child(5),
+.btn:nth-child(6),
+.btn:nth-child(7),
+.btn:nth-child(13),
+.btn:nth-child(19),
+.btn:nth-child(25),
+.btn:nth-child(31) {
+    background-color: #333;
+    color: #fff;
+}
+.btn:nth-child(4):hover,
+.btn:nth-child(5):hover,
+.btn:nth-child(6):hover,
+.btn:nth-child(7):hover,
+.btn:nth-child(13):hover,
+.btn:nth-child(19):hover,
+.btn:nth-child(25):hover,
+.btn:nth-child(31):hover {
+    background-color: #222;
+    color: #fff;
 }
 
 .btn:nth-child(2),
 .btn:nth-child(3),
-.btn:nth-child(4),
-.btn:nth-child(5),
+.btn:nth-child(8),
 .btn:nth-child(9),
-.btn:nth-child(13),
-.btn:nth-child(17),
-.btn:nth-child(21) {
-    background-color: #333;
+.btn:nth-child(14),
+.btn:nth-child(15),
+.btn:nth-child(20),
+.btn:nth-child(21),
+.btn:nth-child(26),
+.btn:nth-child(27) {
+    background-color: rgb(65, 73, 148);
     color: #fff;
 }
 
-.btn:nth-child(20) {
-    background-color: #145bc5;
+.btn:nth-child(30) {
+    background-color: #c51414;
     color: #fff;
 }
