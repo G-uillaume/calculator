@@ -21,7 +21,7 @@ const signs = [{
         type: 'function'
     },
     {
-        display: 'AC',
+        display: 'DEL',
         type: 'function'
     },
     {
