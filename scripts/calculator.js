@@ -24,13 +24,20 @@ const dollarToEuro = x => Math.round((x * 0.84) * arrondi) / arrondi;
 /*----------------------------------------------------*/
 
 const buttons = document.querySelectorAll('.btn');
-const history = []
+const history = [];
+const current = [];
 let noDoubleDots = false;
 let result = false;
 
 /*----------------------------------------------------*/
 
 const calc = (input) => {
+    if (current.length >= 24) {
+        current.pop();
+    }
+    if (history.length > 3) {
+        history.shift();
+    }
     if (p.textContent == 0) {
         p.textContent = '';
     }
@@ -38,109 +45,153 @@ const calc = (input) => {
         if (input == '.') {
             if (!noDoubleDots) {
                 noDoubleDots = true;
-                p.textContent += '.';
+                current.push('.')
+                p.textContent = current.join('');
             }
         } else if (input == '%') {
-            p.textContent = safeEval(String(p.textContent)) / 100;
+            history.push('%' + p.textContent);
+            p2.textContent = history.join(', ');
+            current.push(safeEval(String(p.textContent)) / 100)
+            current.splice(0, current.length - 1);
+            p.textContent = current.join('');
             if (Number.isInteger(Number(p.textContent))) {
                 noDoubleDots = false;
             } else {
                 noDoubleDots = true;
             }
         } else if (input == '+') {
-            p.textContent += '+';
+            current.push('+');
+            p.textContent = current.join('');
             if (!noDoubleDots) {
                 noDoubleDots = true;
             }
             noDoubleDots = false;
         } else if (input == '-') {
-            p.textContent += '-';
+            current.push('-');
+            p.textContent = current.join('');
             if (!noDoubleDots) {
                 noDoubleDots = true;
             }
             noDoubleDots = false;
         } else if (input == '(') {
-            p.textContent += '(';
+            current.push('(');
+            p.textContent = current.join('');
             if (!noDoubleDots) {
                 noDoubleDots = true;
             }
             noDoubleDots = false;
         } else if (input == ')') {
-            p.textContent += ')';
+            current.push(')');
+            p.textContent = current.join('');
             if (!noDoubleDots) {
                 noDoubleDots = true;
             }
             noDoubleDots = false;
         } else if (input == 'x') {
-            p.textContent += '*';
+            current.push('*');
+            p.textContent = current.join('');
             if (!noDoubleDots) {
                 noDoubleDots = true;
             }
             noDoubleDots = false;
         } else if (input == '/') {
-            p.textContent += '/';
+            current.push('/');
+            p.textContent = current.join('');
             if (!noDoubleDots) {
                 noDoubleDots = true;
             }
             noDoubleDots = false;
         } else {
-            p.textContent += String(input)
+            current.push(input);
+            p.textContent = current.join('');
         }
-    } // NOUVELLES TOUCHES A VERIFIER
+    } 
+    /*--------------------------------------------------------*/
+            /*----PROBLEME !!!!!!-----*/
+    /*--------------------------------------------------------*/
     else if (input == 'Inv') {
-        p.textContent = inv(safeEval(String(p.textContent)));
+        history.push('Inv' + p.textContent + ' = ' + inv(safeEval(String(p.textContent))));
+        p2.textContent = history.join(', ');
+        current.push(inv(safeEval(String(p.textContent))));
+        current.splice(0, current.length - 1);
+        p.textContent = current.join('');
         if (Number.isInteger(Number(p.textContent))) {
             noDoubleDots = false;
         } else {
             noDoubleDots = true;
         }
     } else if (input == 'x!') {
-        p.textContent = factorial(safeEval(String(p.textContent)));
-        if (!noDoubleDots) {
-            noDoubleDots = true;
-        }
+        history.push('x!' + p.textContent + ' = ' + factorial(safeEval(String(p.textContent))));
+        p2.textContent = history.join(', ');
+        current.push(factorial(safeEval(String(p.textContent))));
+        current.splice(0, current.length - 1);
+        p.textContent = current.join('');
         if (Number.isInteger(Number(p.textContent))) {
             noDoubleDots = false;
         } else {
             noDoubleDots = true;
         }
     } else if (input == 'sin') {
-        p.textContent = Math.round(Math.sin(safeEval(String(p.textContent))) * arrondi) / arrondi;
+        history.push('sin' + p.textContent + ' = ' + Math.round(Math.sin(safeEval(String(p.textContent))) * arrondi) / arrondi);
+        p2.textContent = history.join(', ');
+        current.push(Math.round(Math.sin(safeEval(String(p.textContent))) * arrondi) / arrondi);
+        current.splice(0, current.length - 1);
+        p.textContent = current.join('');
         if (Number.isInteger(Number(p.textContent))) {
             noDoubleDots = false;
         } else {
             noDoubleDots = true;
         }
     } else if (input == 'ln') {
-        p.textContent = Math.round(Math.log(safeEval(String(p.textContent))) * arrondi) / arrondi;
+        history.push('ln' + p.textContent + ' = ' + Math.round(Math.log(safeEval(String(p.textContent))) * arrondi) / arrondi);
+        p2.textContent = history.join(', ');
+        current.push(Math.round(Math.log(safeEval(String(p.textContent))) * arrondi) / arrondi);
+        current.splice(0, current.length - 1);
+        p.textContent = current.join('');
         if (Number.isInteger(Number(p.textContent))) {
             noDoubleDots = false;
         } else {
             noDoubleDots = true;
         }
     } else if (input == 'cos') {
-        p.textContent = Math.round(Math.cos(safeEval(String(p.textContent))) * arrondi) / arrondi;
+        history.push('cos' + p.textContent + ' = ' + Math.round(Math.cos(safeEval(String(p.textContent))) * arrondi) / arrondi);
+        p2.textContent = history.join(', ');
+        current.push(Math.round(Math.cos(safeEval(String(p.textContent))) * arrondi) / arrondi);
+        current.splice(0, current.length - 1);
+        p.textContent = current.join('');
         if (Number.isInteger(Number(p.textContent))) {
             noDoubleDots = false;
         } else {
             noDoubleDots = true;
         }
     } else if (input == 'log') {
-        p.textContent = log(safeEval(String(p.textContent)));
+        history.push('log' + p.textContent + ' = ' + log(safeEval(String(p.textContent))));
+        p2.textContent = history.join(', ');
+        current.push(log(safeEval(String(p.textContent))));
+        current.splice(0, current.length - 1);
+        p.textContent = current.join('');
         if (Number.isInteger(Number(p.textContent))) {
             noDoubleDots = false;
         } else {
             noDoubleDots = true;
         }
     } else if (input == 'tan') {
-        p.textContent = Math.round(Math.tan(safeEval(String(p.textContent))) * arrondi) / arrondi;
+        history.push('tan' + p.textContent + ' = ' + Math.round(Math.tan(safeEval(String(p.textContent))) * arrondi) / arrondi);
+        p2.textContent = history.join(', ');
+        current.push(Math.round(Math.tan(safeEval(String(p.textContent))) * arrondi) / arrondi);
+        current.splice(0, current.length - 1);
+        p.textContent = current.join('');
         if (Number.isInteger(Number(p.textContent))) {
             noDoubleDots = false;
         } else {
             noDoubleDots = true;
         }
     } else if (input == '√') {
-        p.textContent = Math.round(Math.sqrt(safeEval(String(p.textContent))) * arrondi) / arrondi;
+        history.push('√' + p.textContent + ' = ' + Math.round(Math.sqrt(safeEval(String(p.textContent))) * arrondi) / arrondi);
+        p2.textContent = history.join(', ');
+        current.push(Math.round(Math.sqrt(safeEval(String(p.textContent))) * arrondi) / arrondi);
+        current.splice(0, current.length - 1);
+        p.textContent = current.join('');
         if (Number.isInteger(Number(p.textContent))) {
             noDoubleDots = false;
         } else {
@@ -148,12 +199,31 @@ const calc = (input) => {
         }
     } 
     else if (input == '€') {
-        p.textContent = dollarToEuro(safeEval(String(p.textContent)));
+        history.push(safeEval(String(p.textContent)) + ' $ = ' + dollarToEuro(safeEval(String(p.textContent))) + ' €')
+        p2.textContent = history.join(', ');
+        current.push(dollarToEuro(safeEval(String(p.textContent))));
+        current.splice(0, current.length - 1);
+        p.textContent = current.join('');
+        if (Number.isInteger(Number(p.textContent))) {
+            noDoubleDots = false;
+        } else {
+            noDoubleDots = true;
+        }
     }
     else if (input == '$') {
-        p.textContent = euroToDollar(safeEval(String(p.textContent)));
+        history.push(safeEval(String(p.textContent)) + ' € = ' + euroToDollar(safeEval(String(p.textContent))) + ' $');
+        p2.textContent = history.join(', ');
+        current.push(euroToDollar(safeEval(String(p.textContent))));
+        current.splice(0, current.length - 1);
+        p.textContent = current.join('');
+        if (Number.isInteger(Number(p.textContent))) {
+            noDoubleDots = false;
+        } else {
+            noDoubleDots = true;
+        }
     }
     else if (input == 'DEL') {
+        current.splice(0, current.length);
         p.textContent = '0';
         if (!noDoubleDots) {
             noDoubleDots = true;
@@ -161,11 +231,12 @@ const calc = (input) => {
         noDoubleDots = false;
     } else {
         history.push(p.textContent + '=' + safeEval(String(p.textContent)));
-        p.textContent = safeEval(String(p.textContent));
-        if (history.length > 3) {
-            history.shift();
-        }
         p2.textContent = history.join(', ');
+        current.push(safeEval(String(p.textContent)));
+        current.splice(0, current.length-1);
+        p.textContent = current;
+        
+        
     }
 }
 
